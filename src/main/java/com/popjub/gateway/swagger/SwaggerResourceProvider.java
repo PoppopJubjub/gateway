@@ -1,4 +1,4 @@
-package com.popjub.gateway.config;
+package com.popjub.gateway.swagger;
 
 import java.util.ArrayList;
 import java.util.List;

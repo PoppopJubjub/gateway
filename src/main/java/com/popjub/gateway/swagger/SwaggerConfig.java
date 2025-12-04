@@ -1,4 +1,4 @@
-package com.popjub.gateway.config;
+package com.popjub.gateway.swagger;
 
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
