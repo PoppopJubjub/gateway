@@ -13,14 +13,12 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/api/v1/users/**
-            - Path=/api/v1/auth/**
+            - Path=/api/v1/users/**, /api/v1/auth/**
 
         - id: store-service
           uri: lb://store-service
           predicates:
-            - Path=/api/v1/stores/**
-            - Path=/api/v1/categories/**
+            - Path=/api/v1/stores/**, /api/v1/categories/**
 
         - id: reservation-service
           uri: lb://reservation-service
@@ -41,7 +39,7 @@ spring:
           uri: lb://ai-service
           predicates:
             - Path=/api/v1/ai/**
-        # Swagger ??? ???
+        # Swagger 문서용 라우팅
         - id: user-service-api-docs
           uri: lb://user-service
           predicates:
@@ -79,6 +77,19 @@ spring:
           filters:
             - RewritePath=/ai-service/api-docs, /api-docs
 
+gateway:
+  excluded-paths:
+    - /api/v1/auth/sign-up
+    - /api/v1/auth/sign-up/manager
+    - /api/v1/auth/login
+    # Swagger
+    - /**/api-docs/**
+    - /swagger-ui/**
+    - /webjars/**
+    - /swagger-ui.html
+jwt:
+  secret: ${JWT_SECRET}
+
 eureka:
   client:
     service-url:
@@ -103,3 +114,8 @@ springdoc:
         url: /notification-service/api-docs
       - name: ai-service
         url: /ai-service/api-docs
+
+logging:
+  level:
+    com.popjub.gateway: DEBUG
+    org.springframework.cloud.gateway: DEBUG
