@@ -79,8 +79,7 @@ spring:
 
 gateway:
   excluded-paths:
-    - /api/v1/auth/sign-up
-    - /api/v1/auth/sign-up/manager
+    - /api/v1/auth/sign-up/**
     - /api/v1/auth/login
     # Swagger
     - /**/api-docs/**
