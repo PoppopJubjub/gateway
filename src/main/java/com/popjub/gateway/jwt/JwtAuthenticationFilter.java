@@ -65,17 +65,15 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
 			Claims claims = jwtTokenValidator.getClaims(token);
 
 			Long userId = Long.parseLong(claims.getSubject());
-			String userName = claims.get("userName", String.class);
 			List<String> roles = claims.get("roles", List.class);
 
 			String rolesString = String.join(",", roles);
 
-			log.info("인증 성공 - userId: {}, userName: {}, roles: {}", userId, userName, rolesString);
+			log.info("인증 성공 - userId: {}, roles: {}", userId, rolesString);
 
 			// 5. 헤더 추가
 			ServerHttpRequest newRequest = request.mutate()
 				.header("X-USER-ID", userId.toString())
-				.header("X-USER-NAME", userName)
 				.header("X-USER-ROLES", rolesString)
 				.build();
 
