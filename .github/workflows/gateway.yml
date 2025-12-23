@@ -2,7 +2,7 @@ name: gateway CI/CD
 
 on:
   push:
-    branches: [ "test" ]
+    branches: [ "main" ]
 
 jobs:
   build:
