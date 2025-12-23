@@ -36,8 +36,8 @@ jobs:
 
       - name: Build & Push Docker Image
         run: |
-          docker build -t eureka-server:latest .
-          docker tag eureka-server:latest ${{ secrets.ECR_URI }}:latest
+          docker build -t gateway:latest .
+          docker tag gateway:latest ${{ secrets.ECR_URI }}:latest
           docker push ${{ secrets.ECR_URI }}:latest
 
       - name: Deploy to EC2
@@ -55,7 +55,7 @@ jobs:
             docker stop gateway || true
             docker rm gateway || true
             docker run -d \
-              --name eureka-server \
+              --name gateway \
               --env-file /home/ec2-user/gateway.env \
               -p 18000:18000 \
               ${{ secrets.ECR_URI }}:latest
